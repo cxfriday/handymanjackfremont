@@ -138,7 +138,7 @@
         text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
       }
 
-      /* 水平滚动的 slider 样式，每个 slide 占满整个视窗宽度 */
+      /* 水平滚动的 slider 样式 */
       .gallery {
         display: flex;
         overflow-x: auto;
@@ -171,25 +171,26 @@
         font-size: 1.1em;
       }
     </style>
-    <!-- 新增：优化 Interesting Case Studies 在手机端的显示 -->
+    <!-- 新增：优化 Interesting Case Studies 在手机端的上下滑动展示 -->
     <style>
       @media only screen and (max-width: 768px) {
         #interesting-case-studies .slider-gallery {
           display: flex;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
+          flex-direction: column;
+          overflow-y: auto;
+          scroll-snap-type: y mandatory;
           gap: 20px;
           -ms-overflow-style: none;
           scrollbar-width: none;
-          padding: 0 10px;
+          padding: 10px 0;
         }
         #interesting-case-studies .slider-gallery::-webkit-scrollbar {
           display: none;
         }
         #interesting-case-studies .slider-gallery article {
-          flex: 0 0 100vw;
-          scroll-snap-align: center;
-          margin-right: 10px;
+          flex: 0 0 auto;
+          scroll-snap-align: start;
+          margin-bottom: 10px;
         }
         #interesting-case-studies .slider-gallery img {
           width: 100%;

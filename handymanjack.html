@@ -138,7 +138,7 @@
         text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
       }
 
-      /* 水平滚动的 slider 样式，每个 slide 占满整个视窗宽度 */
+      /* 水平滚动的 slider 样式 */
       .gallery {
         display: flex;
         overflow-x: auto;
@@ -169,6 +169,34 @@
       .gallery h3 {
         margin-top: 10px;
         font-size: 1.1em;
+      }
+    </style>
+    <!-- 新增：优化 Interesting Case Studies 在手机端的上下滑动展示 -->
+    <style>
+      @media only screen and (max-width: 768px) {
+        #interesting-case-studies .slider-gallery {
+          display: flex;
+          flex-direction: column;
+          overflow-y: auto;
+          scroll-snap-type: y mandatory;
+          gap: 20px;
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+          padding: 10px 0;
+        }
+        #interesting-case-studies .slider-gallery::-webkit-scrollbar {
+          display: none;
+        }
+        #interesting-case-studies .slider-gallery article {
+          flex: 0 0 auto;
+          scroll-snap-align: start;
+          margin-bottom: 10px;
+        }
+        #interesting-case-studies .slider-gallery img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
       }
     </style>
   </head>
@@ -229,8 +257,8 @@
             <div class="services-grid">
 
               <div class="service-item">
-                <a href="images/caulking.png" data-lightbox="services" data-title="Caulking">
-                  <div class="service-box" style="background-image: url('images/caulking.png');">
+                <a href="images/Caulking.png" data-lightbox="services" data-title="images/Caulking.png">
+                  <div class="service-box" style="background-image: url('images/Caulking.png');">
                     <div class="service-box-text">Caulking</div>
                   </div>
                 </a>
@@ -238,8 +266,8 @@
               </div>
 
               <div class="service-item">
-                <a href="images/plumbing.jpg" data-lightbox="services" data-title="Kitchen sink drain">
-                  <div class="service-box" style="background-image: url('images/plumbing.jpg');">
+                <a href="images/Plumbing.jpg" data-lightbox="services" data-title="Kitchen sink drain">
+                  <div class="service-box" style="background-image: url('images/Plumbing.jpg');">
                     <div class="service-box-text">Kitchen sink drain</div>
                   </div>
                 </a>
@@ -283,8 +311,8 @@
               </div>
 
               <div class="service-item">
-                <a href="images/fencing.png" data-lightbox="services" data-title="Fencing">
-                  <div class="service-box" style="background-image: url('images/fencing.png');">
+                <a href="images/Fencing.png" data-lightbox="services" data-title="Fencing">
+                  <div class="service-box" style="background-image: url('images/Fencing.png');">
                     <div class="service-box-text">Fencing</div>
                   </div>
                 </a>
@@ -459,7 +487,7 @@
             <div class="slider-gallery">
               <!-- 1. Stair handrail installation -->
               <article>
-                <a href="images/stair-handrail-installation.png" class="image" data-lightbox="gallery" data-title="Stair handrail installation">
+                <a href="images/stair-handrail-installation.png" class="image">
                   <img src="images/stair-handrail-installation.png" alt="Stair handrail installation" />
                 </a>
                 <h3>Stair handrail installation</h3>
@@ -467,7 +495,7 @@
               
               <!-- 2. Showerdoor replacement -->
               <article>
-                <a href="images/showerdoor-replacement.png" class="image" data-lightbox="gallery" data-title="Showerdoor replacement">
+                <a href="images/showerdoor-replacement.png" class="image">
                   <img src="images/showerdoor-replacement.png" alt="Showerdoor replacement" />
                 </a>
                 <h3>Showerdoor replacement</h3>
@@ -475,7 +503,7 @@
               
               <!-- 3. New kitchen lighting replacement -->
               <article>
-                <a href="images/new-kitchen-lighting-replacement.png" class="image" data-lightbox="gallery" data-title="New kitchen lighting replacement">
+                <a href="images/new-kitchen-lighting-replacement.png" class="image">
                   <img src="images/new-kitchen-lighting-replacement.png" alt="New kitchen lighting replacement" />
                 </a>
                 <h3>New kitchen lighting replacement</h3>
@@ -483,31 +511,31 @@
               
               <!-- 4. New faucet replacement -->
               <article>
-                <a href="images/newfaucet-replacement.png" class="image" data-lightbox="gallery" data-title="New faucet replacement">
-                  <img src="images/newfaucet-replacement.png" alt="New faucet replacement" />
+                <a href="images/newfaucet-replacement.PNG" class="image">
+                  <img src="images/newfaucet-replacement.PNG" alt="New faucet replacement" />
                 </a>
                 <h3>New faucet replacement</h3>
               </article>
               
               <!-- 5. New faucet replacement2 -->
               <article>
-                <a href="images/New-faucet.png" class="image" data-lightbox="gallery" data-title="New-faucet">
-                  <img src="images/New-faucet.png" alt="New-faucet" />
+                <a href="images/New-faucet.PNG" class="image">
+                  <img src="images/New-faucet.PNG" alt="New-faucet" />
                 </a>
                 <h3>New-faucet</h3>
               </article>
               
               <!-- 6. new-Showerdoor replacement -->
               <article>
-                <a href="images/new-Showerdoor replacement.png" class="image" data-lightbox="gallery" data-title="new-Showerdoor replacement">
-                  <img src="images/new-Showerdoor replacement.png" alt="new-Showerdoor replacement" />
+                <a href="images/new-Showerdoor replacement.PNG" class="image">
+                  <img src="images/new-Showerdoor replacement.PNG" alt="new-Showerdoor replacement" />
                 </a>
                 <h3>new-Showerdoor replacement</h3>
               </article>
               
               <!-- 8. New showerdoor replacement -->
               <article>
-                <a href="images/new-showerdoor-replacement.jpg" class="image" data-lightbox="gallery" data-title="New showerdoor replacement">
+                <a href="images/new-showerdoor-replacement.jpg" class="image">
                   <img src="images/new-showerdoor-replacement.jpg" alt="New showerdoor replacement" />
                 </a>
                 <h3>New showerdoor replacement</h3>
@@ -515,7 +543,7 @@
               
               <!-- 7. Work Van -->
               <article>
-                <a href="images/workvan.PNG" class="image" data-lightbox="gallery" data-title="Work Van">
+                <a href="images/workvan.PNG" class="image">
                   <img src="images/workvan.PNG" alt="Work Van" />
                 </a>
                 <h3>Work Van</h3>

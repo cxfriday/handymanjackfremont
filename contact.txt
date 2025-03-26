@@ -1,0 +1,540 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>handymanjack </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Jack Handyman Services offers reliable home maintenance, installation, and small repairs in the Bay Area">
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <style>
+      /* 背景图设置 */
+      #intro {
+        /* 将图片设为背景 */
+        background: url("images/workerjackbg.png") no-repeat center center;
+        background-size: cover; /* 改为 cover，确保在各端都能覆盖整个容器 */
+        min-height: 60vh;       /* 避免内容过少时背景太挤 */
+        padding: 4em 2em;       /* 给内容一些内边距 */
+        position: relative;     /* 为了放置遮罩层 */
+      }
+
+      /* 半透明遮罩层 */
+      #intro::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.35); /* 可根据需要调整透明度 */
+        z-index: 0;
+      }
+
+      /* 让 #intro 里的文字和按钮位于遮罩层之上，并加文字阴影 */
+      #intro h1,
+      #intro p,
+      #intro .actions {
+        position: relative;
+        z-index: 3;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+      }
+
+      /* 原有：保证画廊图片在小屏幕自适应 */
+      @media only screen and (max-width: 768px) {
+        .gallery img {
+          max-width: 100%;
+          height: auto;
+        }
+        /* 移动端：服务区块单列排列，图片高度适当调整 */
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+        .service-box {
+          height: 200px;
+        }
+      }
+
+      /* 新增：让地图 iframe 在各端自适应宽度 */
+      .map iframe {
+        max-width: 100%;
+        width: 100% !important;   /* 覆盖内联的宽度 */
+        height: auto !important; /* 覆盖内联的高度 */
+        border: 0 !important;    /* 保持无边框 */
+        display: block;
+        margin: 0 auto;          /* 居中 */
+      }
+      /* 针对不同屏幕高度做最小高度限制，避免地图过小 */
+      @media only screen and (max-width: 768px) {
+        .map iframe {
+          height: 300px !important;
+        }
+      }
+      @media only screen and (min-width: 769px) {
+        .map iframe {
+          height: 450px !important;
+        }
+      }
+
+      /* 优化 footer 在手机端的排版：让段落居中，行距更舒适 */
+      @media only screen and (max-width: 768px) {
+        #footer p {
+          margin: 10px 0;
+          text-align: center;
+        }
+      }
+      
+      /* 服务区块的网格布局 */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 每行两个大图 */
+        gap: 20px;
+      }
+
+      .service-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .service-box {
+        height: 280px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .service-box-text {
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      }
+
+      .service-description {
+        font-size: 14px;
+        color: #666;
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .service-box::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 1;
+      }
+      .service-box-text {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        font-size: 1.2em;
+        font-weight: 600;
+        text-align: center;
+        text-transform: uppercase;
+        padding: 0 1em;
+        line-height: 1.4em;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+      }
+
+      /* 水平滚动的 slider 样式，每个 slide 占满整个视窗宽度 */
+      .gallery {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        /* 可选：隐藏滚动条 */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .gallery::-webkit-scrollbar {
+        display: none;
+      }
+      .gallery article {
+        flex: 0 0 100vw; /* 每个 slide 占满 100% 视口宽度 */
+        scroll-snap-align: center;
+        text-align: center;
+        background: #f8f8f8;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      .gallery img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 4px;
+      }
+      .gallery h3 {
+        margin-top: 10px;
+        font-size: 1.1em;
+      }
+    </style>
+  </head>
+  <body class="is-preload">
+    <div id="wrapper" class="fade-in">
+      
+      <!-- Intro Section -->
+      <div id="intro">
+        <h1>handymanjack</h1>
+        <p>Your Trusted Handyman in the Bay Area </p>
+        <p>
+          <a href="tel:+16199839628" class="button icon solid solo fa-phone">619-983-9628</a>
+        </p>
+        <ul class="actions">
+          <li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+        </ul>
+      </div>
+      
+      <!-- Header -->
+      <header id="header">
+        <a href="index.html" class="logo">handymanjack</a>
+      </header>
+      
+      <!-- Navigation -->
+      <nav id="nav">
+        <ul class="links">
+          <li class="active"><a href="handymanjack.html">handymanjack</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="Interesting Case Studies.html">Interesting Case Studies</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <ul class="icons">
+          <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+          <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+        </ul>
+      </nav>
+
+      
+      <!-- Main Content -->
+      <div id="main">
+        
+        <!-- handymanjack Section -->
+        <section id="handymanjack">
+          <header class="major">
+            <h2>handymanjack</h2>
+          </header>
+          <p>
+          Handymanjack is your trusted Fremont handyman providing reliable, affordable home repairs, maintenance, and installations across the Bay Area. With years of hands‑on experience, I specialize in plumbing fixes, fixture installation, light carpentry, painting touch‑ups, and general household upkeep. Enjoy fast quotes, transparent pricing, and quality workmanship backed by a commitment to customer satisfaction. Get a free estimate today for all your “handyman near me” needs in Fremont, CA and surrounding communities.
+          </p>
+
+          <section id="services" style="padding-bottom:80px;">
+            <header class="major">
+              <h2>Handymanjack Services</h2>
+            </header>
+            <div class="services-grid">
+
+              <div class="service-item">
+                <a href="images/caulking.png" data-lightbox="services" data-title="Caulking">
+                  <div class="service-box" style="background-image: url('images/caulking.png');">
+                    <div class="service-box-text">Caulking</div>
+                  </div>
+                </a>
+                <p class="service-description">Professional caulking services in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/plumbing.jpg" data-lightbox="services" data-title="Kitchen sink drain">
+                  <div class="service-box" style="background-image: url('images/plumbing.jpg');">
+                    <div class="service-box-text">Kitchen sink drain</div>
+                  </div>
+                </a>
+                <p class="service-description">Fremont kitchen sink drain repairs by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/residential-property-maintenance.png" data-lightbox="services" data-title="Maintenance">
+                  <div class="service-box" style="background-image: url('images/residential-property-maintenance.png');">
+                    <div class="service-box-text">Maintenance</div>
+                  </div>
+                </a>
+                <p class="service-description">Comprehensive property maintenance by Fremont Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/gutter-cleaning.png" data-lightbox="services" data-title="Gutter">
+                  <div class="service-box" style="background-image: url('images/gutter-cleaning.png');">
+                    <div class="service-box-text">Gutter</div>
+                  </div>
+                </a>
+                <p class="service-description">Expert gutter cleaning services in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/furniture-assembly.png" data-lightbox="services" data-title="Furniture Assembly">
+                  <div class="service-box" style="background-image: url('images/furniture-assembly.png');">
+                    <div class="service-box-text">Furniture Assembly</div>
+                  </div>
+                </a>
+                <p class="service-description">Efficient furniture assembly services in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/ceiling-fan-installation.png" data-lightbox="services" data-title="Ceiling Fan">
+                  <div class="service-box" style="background-image: url('images/ceiling-fan-installation.png');">
+                    <div class="service-box-text">Ceiling Fan</div>
+                  </div>
+                </a>
+                <p class="service-description">Fremont ceiling fan replacement services by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/fencing.png" data-lightbox="services" data-title="Fencing">
+                  <div class="service-box" style="background-image: url('images/fencing.png');">
+                    <div class="service-box-text">Fencing</div>
+                  </div>
+                </a>
+                <p class="service-description">Handymanjack delivers quality fence upgrades and repairs in Fremont.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/to-do-lists.png" data-lightbox="services" data-title="To-Do Lists">
+                  <div class="service-box" style="background-image: url('images/to-do-lists.png');">
+                    <div class="service-box-text">To-Do Lists</div>
+                  </div>
+                </a>
+                <p class="service-description">Get your home tasks done with Fremont Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/toilet-replacement.png" data-lightbox="services" data-title="Toilet Replacement">
+                  <div class="service-box" style="background-image: url('images/toilet-replacement.png');">
+                    <div class="service-box-text">Toilet Replacement</div>
+                  </div>
+                </a>
+                <p class="service-description">Expert toilet replacement services in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/light-fixture-installation.png" data-lightbox="services" data-title="Light Fixture">
+                  <div class="service-box" style="background-image: url('images/light-fixture-installation.png');">
+                    <div class="service-box-text">Light Fixture</div>
+                  </div>
+                </a>
+                <p class="service-description">Expert light fixture swap‑outs in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/shower-valve-replacement.png" data-lightbox="services" data-title="Shower Valve">
+                  <div class="service-box" style="background-image: url('images/shower-valve-replacement.png');">
+                    <div class="service-box-text">Shower Valve</div>
+                  </div>
+                </a>
+                <p class="service-description">Reliable shower valve cartridge replacement in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/garbage-disposal-replacement.png" data-lightbox="services" data-title="Garbage Disposal">
+                  <div class="service-box" style="background-image: url('images/garbage-disposal-replacement.png');">
+                    <div class="service-box-text">Garbage Disposal</div>
+                  </div>
+                </a>
+                <p class="service-description">Fast garbage disposal replacement by Fremont Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/faucet-replacement.png" data-lightbox="services" data-title="Faucet">
+                  <div class="service-box" style="background-image: url('images/faucet-replacement.png');">
+                    <div class="service-box-text">Faucet</div>
+                  </div>
+                </a>
+                <p class="service-description">Professional faucet replacement in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/water-filter.png" data-lightbox="services" data-title="Water Filter">
+                  <div class="service-box" style="background-image: url('images/water-filter.png');">
+                    <div class="service-box-text">Water Filter</div>
+                  </div>
+                </a>
+                <p class="service-description">Clean water filter installation by Fremont Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/exhaust-fan.png" data-lightbox="services" data-title="Exhaust Fan">
+                  <div class="service-box" style="background-image: url('images/exhaust-fan.png');">
+                    <div class="service-box-text">Exhaust Fan</div>
+                  </div>
+                </a>
+                <p class="service-description">Efficient exhaust fan replacement by Fremont Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/deck.png" data-lightbox="services" data-title="Deck">
+                  <div class="service-box" style="background-image: url('images/deck.png');">
+                    <div class="service-box-text">Deck</div>
+                  </div>
+                </a>
+                <p class="service-description">Handymanjack offers beautiful deck upgrades and repairs in Fremont.</p>
+              </div>
+
+              <!-- 新增的服务项 -->
+
+              <div class="service-item">
+                <a href="images/shower-door-replacement.png" data-lightbox="services" data-title="Shower Door Replacement">
+                  <div class="service-box" style="background-image: url('images/shower-door-replacement.png');">
+                    <div class="service-box-text">Shower Door Replacement</div>
+                  </div>
+                </a>
+                <p class="service-description">Expert shower door replacement services in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/drywall-repair.png" data-lightbox="services" data-title="Drywall Repair">
+                  <div class="service-box" style="background-image: url('images/drywall-repair.png');">
+                    <div class="service-box-text">Drywall Repair</div>
+                  </div>
+                </a>
+                <p class="service-description">Professional drywall repair services in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/floor-repair.png" data-lightbox="services" data-title="Floor Repair">
+                  <div class="service-box" style="background-image: url('images/floor-repair.png');">
+                    <div class="service-box-text">Floor Repair</div>
+                  </div>
+                </a>
+                <p class="service-description">Efficient floor repair services in Fremont by Handymanjack.</p>
+              </div>
+
+              <div class="service-item">
+                <a href="images/door-replacement-installation.png" data-lightbox="services" data-title="Door Replacement and Installation">
+                  <div class="service-box" style="background-image: url('images/door-replacement-installation.png');">
+                    <div class="service-box-text">Door Replacement and Installation</div>
+                  </div>
+                </a>
+                <p class="service-description">Reliable door replacement and installation services in Fremont by Handymanjack.</p>
+              </div>
+
+            </div>
+          </section>
+        
+         
+        
+          <!-- Testimonials Section -->
+          <section id="testimonials">
+            <header class="major">
+              <h2>Testimonials</h2>
+            </header>
+            <div class="posts">
+              <!-- 1. Michael  -->
+              <article>
+                <header style="display: flex; align-items: center; gap: 10px;">
+                  <img src="images/user1.png" alt="Michael" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                  <div>
+                    <h3 style="margin: 0;">Michael <span>★★★★★</span></h3>
+                    <p class="date" style="margin: 2px 0;">2023-04-01</p>
+                  </div>
+                </header>
+                <p>
+                  I’ve worked with many handymen in the Bay Area, and handymanjack is by far the fastest and most reliable! As a real estate agent, I often need last-minute repairs before listing a home, and Jack and his team have never let me down. They respond within hours and get the job done within 48 hours—sometimes even the same day! I’ve worked with them on at least five properties, and every time, the quality is top-notch. Highly recommended for agents who need speed and efficiency!
+                </p>
+              </article>
+
+              <!-- 2. Lee -->
+              <article>
+                <header style="display: flex; align-items: center; gap: 10px;">
+                  <img src="images/user2.png" alt=" Lee" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                  <div>
+                    <h3 style="margin: 0;">Lee <span>★★★★★</span></h3>
+                    <p class="date" style="margin: 2px 0;">2024-08-13</p>
+                  </div>
+                </header>
+                <p>
+                  Jack helped me patch and repaint a section of drywall that got damaged while rearranging furniture. We got lucky—he had an opening the same day, and I was able to get it taken care of right away.
+                  The work was done smoothly, no surprises, and the wall looks flawless. What I really appreciated was the clear, upfront pricing—no hidden fees, no last-minute add-ons. I also liked how easy the payment process was—Zelle made it quick and hassle-free.
+                  Definitely keeping Jack in my contacts for future repairs. Well done, Jack!
+                </p>
+              </article>
+
+              <!-- 3. Catherine -->
+              <article>
+                <header style="display: flex; align-items: center; gap: 10px;">
+                  <img src="images/user3.png" alt="Catherine" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                  <div>
+                    <h3 style="margin: 0;">Catherine<span>★★★★★</span></h3>
+                    <p class="date" style="margin: 2px 0;">2023-01-07</p>
+                  </div>
+                </header>
+                <p>
+                  I was impressed with Jack’s professionalism and attention to detail when he installed my new kitchen cabinets. He even offered valuable tips for future maintenance. Fantastic job!
+                </p>
+              </article>
+
+              <!-- 4. Dora  -->
+              <article>
+                <header style="display: flex; align-items: center; gap: 10px;">
+                  <img src="images/user4.png" alt="Dora" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                  <div>
+                    <h3 style="margin: 0;">Dora <span>★★★★★</span></h3>
+                    <p class="date" style="margin: 2px 0;">2023-03-10</p>
+                  </div>
+                </header>
+                <p>
+                  Jack transformed my outdated bathroom into a modern oasis. His expertise, patience, and problem-solving skills made the entire process seamless and stress-free. I’m thrilled with the outcome!
+                </p>
+              </article>
+
+              <!-- 5. John  -->
+              <article>
+                <header style="display: flex; align-items: center; gap: 10px;">
+                  <img src="images/user5.png" alt="John" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                  <div>
+                    <h3 style="margin: 0;">John <span>★★★★★</span></h3>
+                    <p class="date" style="margin: 2px 0;">2023-02-25</p>
+                  </div>
+                </header>
+                <p>
+                  Jack’s quick response and quality workmanship saved me from a potential plumbing disaster. He diagnosed the issue right away, fixed it promptly, and left everything spotless.
+                </p>
+              </article>
+            </div>
+          </section>
+        
+          <!-- Contact Section -->
+          <section id="contact">
+            <header class="major">
+              <h2>Contact handymanjack</h2>
+            </header>
+            <p>Feel free to contact us to discuss your home repair needs!</p>
+            <div class="contact-info">
+              <p><strong>Phone:</strong> <a href="tel:+16199839628">619-983-9628</a></p>
+              <p><strong>Email:</strong> <a href="mailto:cxfriday@gmail.com">cxfriday@gmail.com</a></p>
+            </div>
+            <!-- Embedded Google Map -->
+            <div class="map">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.2811833195647!2d-121.99308668469978!3d37.54853997980161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fcac0c0b6e3ed%3A0x60aaaca7e15d42b6!2sFremont%2C%20CA!5e0!3m2!1sen!2sus!4v1678549897688!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </section>
+        
+        </div>
+      
+        <!-- Footer -->
+        <footer id="footer">
+          <p>Serving the Bay Area | Quality Handyman Services | <a href="sms:+16199839628">Text Me: 619-983-9628</a></p>
+          <p style="font-size: 14px; color: #666;">
+            Legal Notice: Handyman services in California are legally limited to projects under $1,000, including labor and materials.
+            <a href="https://www.cslb.ca.gov/Resources/IndustryBulletins/2024/AB%202622%20Implementation.FINAL.pdf" target="_blank" style="color: #4CAF50;">View Regulation Details</a>
+          </p>
+          <div class="copyright">
+            <ul>
+              <li>&copy; Jack Handyman Services</li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+      
+      <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/jquery.scrollex.min.js"></script>
+      <script src="assets/js/jquery.scrolly.min.js"></script>
+      <script src="assets/js/browser.min.js"></script>
+      <script src="assets/js/breakpoints.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <script src="assets/js/main.js"></script>
+  </body>
+</html>
